@@ -84,6 +84,12 @@ public class OkHttpTestActivity extends Activity {
                     m.obj = response.body().toString();
                     //mTextView.setText(response.body().toString());
                     mHandler.sendMessage(m);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             });
         }

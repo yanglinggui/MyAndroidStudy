@@ -13,10 +13,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+
     protected void onClick(View v) {
         switch (v.getId()) {
             case R.id.okhttp:
                 startActivity(new Intent(this, OkHttpTestActivity.class));
+                break;
+            case R.id.rxjava:
+                startActivity(new Intent(this, RxJavaTestActivity.class));
                 break;
         }
     }
