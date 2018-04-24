@@ -40,21 +40,22 @@ public class RxJavaTestActivity extends Activity {
                 try {
                     URL mUrl = new URL("http://www.wanandroid.com/blogimgs/62c1bd68-b5f3-4a3c-a649-7ca8c7dfabe6.png");
                     InputStream is;
-                   // HttpURLConnection mConnect = (HttpURLConnection)mUrl.openConnection();
-                    //HttpURLConnection();
-                    //mConnect.setDoInput(true);
-                    //mConnect.connect();
+                    HttpURLConnection mConnect = (HttpURLConnection)mUrl.openConnection();
+                   // HttpURLConnection();
+                    mConnect.setDoInput(true);
+                    mConnect.connect();
+                    is = mConnect.getInputStream();
 
                     android.util.Log.i("qiao-yang", "---> ...1.");
                     OkHttpClient mClient = new OkHttpClient();
                     android.util.Log.i("qiao-yang", "---> ....2");
                     Request mRequest = new Request.Builder().url("http://www.wanandroid.com/blogimgs/62c1bd68-b5f3-4a3c-a649-7ca8c7dfabe6.png").build();
                     android.util.Log.i("qiao-yang", "---> ....3");
-                   // is = mClient.newCall(mRequest).execute().body().byteStream();
+                    //is = mClient.newCall(mRequest).execute().body().byteStream();
 
-                    //is = mConnect.getInputStream();
+
                     android.util.Log.i("qiao-yang", "---> ....4");
-                    Drawable drawable = Drawable.createFromStream(new URL("https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2502144641,437990411&fm=80&w=179&h=119&img.JPEG").openStream(), "img");
+                    Drawable drawable = Drawable.createFromStream(is, "img");
                     subscriber.onNext(drawable);
                 } catch (Exception e) {
                     android.util.Log.i("qiao-yang", "e = " + e.getMessage());
@@ -63,8 +64,8 @@ public class RxJavaTestActivity extends Activity {
             }
         });
 
-        mObservable.subscribeOn(Schedulers.io());
-        mObservable.observeOn(AndroidSchedulers.mainThread());
+        mObservable = mObservable.subscribeOn(Schedulers.io());
+        mObservable = mObservable.observeOn(AndroidSchedulers.mainThread());
 
         Subscriber<Drawable> mSubscriber = new Subscriber<Drawable>() {
             @Override
