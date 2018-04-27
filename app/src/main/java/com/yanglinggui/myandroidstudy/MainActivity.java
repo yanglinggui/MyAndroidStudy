@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.rxjava:
                 startActivity(new Intent(this, RxJavaTestActivity.class));
                 break;
+            case R.id.recyclerview:
+                startActivity(new Intent(this, RecyclerViewTestActivity.class));
+                break;
         }
     }
 }

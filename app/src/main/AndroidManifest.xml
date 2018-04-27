@@ -20,6 +20,16 @@
         </activity>
         <activity android:name=".OkHttpTestActivity"/>
         <activity android:name=".RxJavaTestActivity"/>
+        <activity android:name=".RecyclerViewTestActivity"/>
+<!--        <activity-alias
+            android:name="SecondActivityAlias"
+            android:label="Alias快捷入口"
+            android:targetActivity=".RecyclerViewTestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>-->
     </application>
 
 </manifest>
