@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.yanglinggui.myandroidstudy.recyclerview.RecyclerViewActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, RxJavaTestActivity.class));
                 break;
             case R.id.recyclerview:
-                startActivity(new Intent(this, RecyclerViewTestActivity.class));
+                startActivity(new Intent(this, RecyclerViewActivity.class));
                 break;
         }
     }

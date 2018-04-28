@@ -21,6 +21,7 @@
         <activity android:name=".OkHttpTestActivity"/>
         <activity android:name=".RxJavaTestActivity"/>
         <activity android:name=".RecyclerViewTestActivity"/>
+        <activity android:name=".recyclerview.RecyclerViewActivity"/>
 <!--        <activity-alias
             android:name="SecondActivityAlias"
             android:label="Alias快捷入口"
