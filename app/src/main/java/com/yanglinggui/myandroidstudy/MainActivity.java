@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.yanglinggui.myandroidstudy.bottomnavigation.BottomNavigationBarActivity;
 import com.yanglinggui.myandroidstudy.recyclerview.RecyclerViewActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.recyclerview:
                 startActivity(new Intent(this, RecyclerViewActivity.class));
+                break;
+            case R.id.bottomnavigationbar:
+                startActivity(new Intent(this, BottomNavigationBarActivity.class));
                 break;
         }
     }

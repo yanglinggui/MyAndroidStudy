@@ -17,6 +17,8 @@ public class RecyclerViewDividerItemDecoration extends RecyclerView.ItemDecorati
     private float divderRightHeight = 0;
     private Paint mPaint;
 
+    private int index = 0;
+
     public RecyclerViewDividerItemDecoration() {
         super();
         mPaint = new Paint();
@@ -34,6 +36,7 @@ public class RecyclerViewDividerItemDecoration extends RecyclerView.ItemDecorati
         for (int i = 0; i < count; i++) {
             v = parent.getChildAt(i);
             int position = parent.getChildAdapterPosition(v);
+            //android.util.Log.i("qiao-yang", "RecyclerViewDividerItemDecoration --->  position" + position);
             mPaint.setAntiAlias(false);
             mPaint.setColor(Color.RED);
             //绘制分割线
@@ -52,7 +55,7 @@ public class RecyclerViewDividerItemDecoration extends RecyclerView.ItemDecorati
                 mTextPaint.setTextSize(100);       // 设置字体大小DP
                 mTextPaint.setAntiAlias(true);       // 设置抗锯齿
                 mTextPaint.setTextAlign(Paint.Align.CENTER); // 设置字体居中
-                c.drawText("sss"+position,dividerLeft+300,dividerTop+95,mTextPaint);
+                c.drawText("sss" + position, dividerLeft + 300, dividerTop + 95, mTextPaint);
             }
             //绘制右侧图案
             //dividerTop = v.getTop() - divderTopHeight;;
@@ -87,6 +90,27 @@ public class RecyclerViewDividerItemDecoration extends RecyclerView.ItemDecorati
             c.drawCircle(v.getLeft() + v.getWidth() / 2, v.getTop() + v.getHeight() / 2, v.getHeight() / 2, mPaint);
             mPaint.reset();
             //int position = parent.getChildAdapterPosition(v);
+            // android.util.Log.i("qiao-yang", "RecyclerViewDividerItemDecoration --->  position" + position);
+
+            if (i == 0) {
+                int position = parent.getChildAdapterPosition(v);
+                android.util.Log.i("qiao-yang", "RecyclerViewDividerItemDecoration --->  position" + position);
+                index = (position % 3 == 0) ? position : index;
+                TextPaint mTextPaint = new TextPaint();
+                mTextPaint.setColor(Color.GREEN); // 设置paint颜色
+                mTextPaint.setTextSize(100);       // 设置字体大小DP
+                mTextPaint.setAntiAlias(true);       // 设置抗锯齿
+                mTextPaint.setTextAlign(Paint.Align.CENTER); // 设置字体居中
+                int top = parent.getPaddingTop();
+                int bottom = top + 100;
+                if(position % 3 == 2){
+                    bottom = v.getBottom()<bottom?v.getBottom():bottom;
+                    top = bottom -100;
+                }
+                //c.drawRect(parent.getPaddingLeft(), top, parent.getWidth(), bottom, mPaint);
+                c.drawText("sss" + index, parent.getPaddingLeft() + 300, bottom, mTextPaint);
+            }
+
         }
     }
 
