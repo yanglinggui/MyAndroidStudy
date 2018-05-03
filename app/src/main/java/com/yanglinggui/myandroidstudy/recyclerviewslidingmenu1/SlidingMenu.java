@@ -1,6 +1,7 @@
 package com.yanglinggui.myandroidstudy.recyclerviewslidingmenu1;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -16,6 +17,7 @@ public class SlidingMenu extends HorizontalScrollView {
     private boolean isOpenMenu = false;
     private final int mScreenWidth;
     private final int mMenuWidth;
+
 
     public SlidingMenu(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -33,22 +35,58 @@ public class SlidingMenu extends HorizontalScrollView {
             wrapper.getChildAt(1).getLayoutParams().width = mMenuWidth;
             once = false;
         }
+        android.util.Log.i("qiao-yang", "onMeasure");
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                closeOpenMenu();
+                break;
             case MotionEvent.ACTION_UP:
                 if (Math.abs(getScaleX()) < mMenuWidth / 2) {
-                    smoothScrollTo(0, 0);
+                    this.smoothScrollTo(0, 0);
                 } else {
-                    smoothScrollTo(mMenuWidth, 0);
+                    this.smoothScrollTo(mMenuWidth, 0);
                 }
+                return true;
         }
         return super.onTouchEvent(ev);
     }
 
+
+    public void closeMenu() {
+        smoothScrollTo(0, 0);
+        isOpenMenu = false;
+    }
+
+    public boolean isOpenMenu() {
+        return isOpenMenu;
+    }
+
+    private void OpenMenu() {
+        getAdapter().saveOpenMenu(this);
+        isOpenMenu = true;
+    }
+
+    private void closeOpenMenu() {
+        if (isOpenMenu) {
+            getAdapter().closeMenu();
+        }
+    }
+
+    private SlidingMenuAdapter getAdapter() {
+        View view = this;
+        while (true) {
+            view = (View) view.getParent();
+            if (view instanceof RecyclerView) {
+                break;
+            }
+        }
+        return (SlidingMenuAdapter) ((RecyclerView) view).getAdapter();
+    }
 
     private int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

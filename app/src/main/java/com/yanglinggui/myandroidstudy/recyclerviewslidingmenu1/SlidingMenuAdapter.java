@@ -17,6 +17,7 @@ public class SlidingMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context context;
     private List<RecyclerViewBean> mData;
     private LayoutInflater inflater;
+    private SlidingMenu mOpenMenu;
 
     public SlidingMenuAdapter(Context context, List<RecyclerViewBean> data) {
         this.context = context;
@@ -47,4 +48,15 @@ public class SlidingMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public int getItemCount() {
         return mData.size();
     }
+
+    public void closeMenu() {
+        if (mOpenMenu != null && mOpenMenu.isOpenMenu()) {
+            mOpenMenu.closeMenu();
+        }
+    }
+
+    public void saveOpenMenu(SlidingMenu menu) {
+        mOpenMenu = menu;
+    }
+
 }
