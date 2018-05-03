@@ -90,6 +90,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public RecyclerViewBean getItemBean(int position) {
+        if (position < 0 || position >= mData.size()) {
+            return null;
+        }
         return mData.get(position);
     }
 

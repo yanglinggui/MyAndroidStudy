@@ -57,19 +57,23 @@ public class RecyclerItemDecoration extends RecyclerView.ItemDecoration {
             int position = parent.getChildAdapterPosition(view);
             bottom = view.getTop();
             top = bottom - mOffsetTopItem;
-            if (null != callBack && callBack.getItemBean(position).isFirest()) {
+            if (null != callBack && null != callBack.getItemBean(position) && callBack
+                    .getItemBean(position).isFirest()) {
                 top = bottom - mOffsetTopHead;
                 mPaint.setColor(Color.YELLOW);
                 //mPaint.setStyle(Paint.Style.STROKE);
                 c.drawRect(left, top, right, bottom, mPaint);
-                c.drawText("" + callBack.getItemBean(position).getGroupId(), left, bottom - 10, textPaint);
+                c.drawText("" + callBack.getItemBean(position).getGroupId(), left, bottom - 10,
+                        textPaint);
             } else {
                 mPaint.setColor(Color.GRAY);
                 c.drawRect(left, top, right, bottom, mPaint);
             }
             mPaint.setColor(Color.RED);
-            c.drawLine(right + mOffsetRight / 2, top, right + mOffsetRight / 2, view.getBottom(), mPaint);
-            c.drawCircle(right + mOffsetRight / 2, bottom + view.getHeight() / 2, mOffsetRight / 2, mPaint);
+            c.drawLine(right + mOffsetRight / 2, top, right + mOffsetRight / 2, view.getBottom(),
+                    mPaint);
+            c.drawCircle(right + mOffsetRight / 2, bottom + view.getHeight() / 2, mOffsetRight /
+                    2, mPaint);
             //mPaint.reset();
         }
     }
@@ -90,17 +94,20 @@ public class RecyclerItemDecoration extends RecyclerView.ItemDecoration {
             int position = parent.getChildAdapterPosition(view);
             top = parent.getPaddingTop();
             if (null != callBack && i == 0) {
-                if (callBack.getItemBean(position).isLast() && view.getBottom() - mOffsetTopHead < top) {
+                if (callBack.getItemBean(position).isLast() && view.getBottom() - mOffsetTopHead
+                        < top) {
                     top = view.getBottom() - mOffsetTopHead;
                 }
                 bottom = top + mOffsetTopHead;
                 mPaint.setColor(Color.YELLOW);
                 //mPaint.setStyle(Paint.Style.STROKE);
                 c.drawRect(left, top, right, bottom, mPaint);
-                c.drawText("" + callBack.getItemBean(position).getGroupId(), left, bottom - 10, textPaint);
+                c.drawText("" + callBack.getItemBean(position).getGroupId(), left, bottom - 10,
+                        textPaint);
             }
             mPaint.setColor(Color.RED);
-            c.drawCircle(left + view.getWidth() / 2, view.getBottom() - view.getHeight() / 2, view.getHeight() / 2,
+            c.drawCircle(left + view.getWidth() / 2, view.getBottom() - view.getHeight() / 2,
+                    view.getHeight() / 2,
                     mPaint);
         }
     }
@@ -123,8 +130,9 @@ public class RecyclerItemDecoration extends RecyclerView.ItemDecoration {
         outRect.top = mOffsetTopItem;
         if (null != callBack) {
             int position = parent.getChildAdapterPosition(view);
+            android.util.Log.i("qiao-yang", "callBack position = " + position);
             RecyclerViewBean mItem = callBack.getItemBean(position);
-            if (mItem.isFirest()) {
+            if (null != mItem && mItem.isFirest()) {
                 outRect.top = mOffsetTopHead;
             }
         }

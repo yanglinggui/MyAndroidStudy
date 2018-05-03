@@ -54,13 +54,13 @@ public class RecyclerViewActivity extends Activity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RecyclerAdapter(this, mData);
         mRecyclerView.setHasFixedSize(true);
-        /*mRecyclerView.addItemDecoration(new RecyclerItemDecoration(new RecyclerItemDecoration
+        mRecyclerView.addItemDecoration(new RecyclerItemDecoration(new RecyclerItemDecoration
                 .CallBack() {
             @Override
             public RecyclerViewBean getItemBean(int position) {
                 return mAdapter.getItemBean(position);
             }
-        }));*/
+        }));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnItemTouchListener(new RecyclerOnItemTouchListener(mRecyclerView) {

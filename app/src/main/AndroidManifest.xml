@@ -22,6 +22,7 @@
         <activity android:name=".RxJavaTestActivity" />
         <activity android:name=".RecyclerViewTestActivity" />
         <activity android:name=".recyclerview.RecyclerViewActivity" />
+        <activity android:name=".recyclerviewslidingmenu1.RecyclerViewSlidingMenuActivity" />
         <activity android:name=".bottomnavigation.BottomNavigationBarActivity" />
         <!--        <activity-alias
                     android:name="SecondActivityAlias"
