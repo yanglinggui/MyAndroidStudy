@@ -17,7 +17,7 @@ public class SlidingMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private Context context;
     private List<RecyclerViewBean> mData;
     private LayoutInflater inflater;
-    private SlidingMenu mOpenMenu;
+    private SlidingMenu mOpenMenu,isOpeningMenu;
 
     public SlidingMenuAdapter(Context context, List<RecyclerViewBean> data) {
         this.context = context;
@@ -32,6 +32,8 @@ public class SlidingMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         //设置分割线
         RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
         layoutParams.topMargin = 15;
+       // layoutParams.leftMargin = parent.getLeft();
+       // layoutParams.rightMargin = layoutParams.leftMargin + parent.getWidth();
         view.setLayoutParams(layoutParams);
 
         return new SlidingMenuHolder(view);
@@ -57,6 +59,14 @@ public class SlidingMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public void saveOpenMenu(SlidingMenu menu) {
         mOpenMenu = menu;
+    }
+
+    public void saveOpeningMenu(SlidingMenu menu){
+        isOpeningMenu = menu;
+    }
+
+    public SlidingMenu isExistOpenMenu(){
+        return isOpeningMenu;
     }
 
 }

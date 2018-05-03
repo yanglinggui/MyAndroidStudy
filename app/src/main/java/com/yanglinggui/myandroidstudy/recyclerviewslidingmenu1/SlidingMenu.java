@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -35,23 +36,35 @@ public class SlidingMenu extends HorizontalScrollView {
             wrapper.getChildAt(1).getLayoutParams().width = mMenuWidth;
             once = false;
         }
-        android.util.Log.i("qiao-yang", "onMeasure");
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+
+
+        if (null != getAdapter().isExistOpenMenu() && getAdapter().isExistOpenMenu() != this) {
+            return false;
+        }
+        android.util.Log.i("qiao-yang", "？？？？");
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                android.util.Log.i("qiao-yang", "ACTION_DOWN");
                 closeOpenMenu();
+                getAdapter().saveOpeningMenu(this);
                 break;
             case MotionEvent.ACTION_UP:
-                if (Math.abs(getScaleX()) < mMenuWidth / 2) {
+                getAdapter().saveOpeningMenu(null);
+                android.util.Log.i("qiao-yang", "getScrollX " + getScrollX());
+                if (Math.abs(getScrollX()) < mMenuWidth / 2) {
                     this.smoothScrollTo(0, 0);
                 } else {
                     this.smoothScrollTo(mMenuWidth, 0);
+                    //isOpenMenu = true;
+                    saveOpenMenu();
                 }
-                return true;
+                return false;
+            //break;
         }
         return super.onTouchEvent(ev);
     }
@@ -59,6 +72,7 @@ public class SlidingMenu extends HorizontalScrollView {
 
     public void closeMenu() {
         smoothScrollTo(0, 0);
+        android.util.Log.i("qiao-yang", "closeMenu");
         isOpenMenu = false;
     }
 
@@ -66,13 +80,13 @@ public class SlidingMenu extends HorizontalScrollView {
         return isOpenMenu;
     }
 
-    private void OpenMenu() {
+    private void saveOpenMenu() {
         getAdapter().saveOpenMenu(this);
         isOpenMenu = true;
     }
 
     private void closeOpenMenu() {
-        if (isOpenMenu) {
+        if (!isOpenMenu) {
             getAdapter().closeMenu();
         }
     }

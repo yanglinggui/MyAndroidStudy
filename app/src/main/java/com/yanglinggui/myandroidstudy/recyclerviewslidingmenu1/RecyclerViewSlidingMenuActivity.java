@@ -12,6 +12,7 @@ import com.yanglinggui.myandroidstudy.recyclerview.RecyclerViewBean;
 import java.util.ArrayList;
 import java.util.List;
 
+//https://blog.csdn.net/yhaolpz/article/details/77366154?utm_source=debugrun&utm_medium=referral
 public class RecyclerViewSlidingMenuActivity extends Activity {
 
     private RecyclerView mRecyclerView;
